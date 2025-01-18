@@ -207,7 +207,7 @@ def main():
         successful_txs = process_network_transactions(current_network, ["Blast - OP Sepolia"] if current_network == 'Blast' else ["OP - Blast"], networks[current_network], successful_txs)
 
         # 自动切换网络
-        time.sleep(random.uniform(30, 60))  # 在每次切换网络时增加随机的延时
+        time.sleep(random.uniform(10, 20))  # 在每次切换网络时增加随机的延时
 
 if __name__ == "__main__":
     main()
