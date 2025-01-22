@@ -40,7 +40,7 @@ menu_color = '\033[95m'  # 菜单文本颜色
 
 # 每个网络的区块浏览器URL
 explorer_urls = {
-    'Blast': 'https://endpoints.omniatech.io/v1/blast/sepolia/public', 
+    'Blast': 'https://sepolia.blast.io', 
     'OP Sepolia': 'https://endpoints.omniatech.io/v1/op/sepolia/public',
     'BRN': 'https://brn.explorer.caldera.xyz/tx/'
 }
