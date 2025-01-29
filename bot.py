@@ -40,8 +40,8 @@ menu_color = '\033[95m'  # 菜单文本颜色
 
 # 每个网络的区块浏览器URL
 explorer_urls = {
-    'Blast': 'https://endpoints.omniatech.io/v1/blast/sepolia/public', 
-    'OP Sepolia': 'https://optimism-sepolia.drpc.org',
+    'Blast': 'https://fragrant-quiet-spring.blast-sepolia.quiknode.pro/57781984326878d3934b9674cdb47c05f63b65f6', 
+    'OP Sepolia': 'https://fittest-clean-morning.optimism-sepolia.quiknode.pro/fa7496b9e10515665cf724e299cda1fceb88a625',
     'BRN': 'https://brn.explorer.caldera.xyz/tx/'
 }
 
@@ -158,7 +158,7 @@ def process_network_transactions(network_name, bridges, chain_data, successful_t
                 print("\n")
             
             # 随机等待 30 到 60 秒
-            wait_time = random.uniform(120, 180)
+            wait_time = random.uniform(60, 120)
             print(f"⏳ 等待 {wait_time:.2f} 秒后继续...\n")
             time.sleep(wait_time)  # 随机延迟时间
 
