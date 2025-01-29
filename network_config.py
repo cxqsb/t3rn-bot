@@ -8,7 +8,7 @@ networks = {
         '0x1D5FD4ed9bDdCCF5A74718B556E9d15743cB26A2' 
     },
     'OP Sepolia': {
-        'rpc_url': 'https://endpoints.omniatech.io/v1/op/sepolia/public',
+        'rpc_url': 'https://sepolia.optimism.io',
         'chain_id': 11155420,
         'contract_address': '0xF221750e52aA080835d2957F2Eed0d5d7dDD8C38'
     },
