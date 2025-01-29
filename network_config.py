@@ -2,7 +2,7 @@
 
 networks = {
     'Blast': {
-        'rpc_url': 'https://sepolia.blast.io', 
+        'rpc_url': 'https://endpoints.omniatech.io/v1/blast/sepolia/public', 
         'chain_id': 168587773, 
         'contract_address': 
         '0x1D5FD4ed9bDdCCF5A74718B556E9d15743cB26A2' 
