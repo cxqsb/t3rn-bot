@@ -199,7 +199,7 @@ def main():
         balance = check_balance(web3, my_address)
 
         # 如果余额不足 0.1 ETH，切换到另一个链
-        if balance < 0:
+        if balance < 1.6:
             print(f"{chain_symbols[current_network]}{current_network}余额不足 0.5 ETH，切换到 {alternate_network}{reset_color}")
             current_network, alternate_network = alternate_network, current_network  # 交换链
 
