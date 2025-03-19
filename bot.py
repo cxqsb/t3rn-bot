@@ -158,7 +158,7 @@ def process_network_transactions(network_name, bridges, chain_data, successful_t
                 print("\n")
             
             # 随机等待 120 到 180 秒
-            wait_time = random.uniform(60, 80)
+            wait_time = random.uniform(30, 40)
             print(f"⏳ 等待 {wait_time:.2f} 秒后继续...\n")
             time.sleep(wait_time)  # 随机延迟时间
 
@@ -180,8 +180,8 @@ def main():
     print("\n\n")
 
     successful_txs = 0
-    current_network = 'OP Sepolia'  # 默认从 Base 链开始
-    alternate_network = 'Base'
+    current_network = 'Base'  # 默认从 Base 链开始
+    alternate_network = 'OP Sepolia'
 
     while True:
         # 检查当前网络余额是否足够
