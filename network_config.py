@@ -1,15 +1,15 @@
 # network_config.py
 
 networks = {
-    'Blast': {
-        'rpc_url': 'https://fragrant-quiet-spring.blast-sepolia.quiknode.pro/57781984326878d3934b9674cdb47c05f63b65f6', 
-        'chain_id': 168587773, 
+    'Base': {
+        'rpc_url': 'https://sepolia.base.org', 
+        'chain_id': 84532, 
         'contract_address': 
-        '0x1D5FD4ed9bDdCCF5A74718B556E9d15743cB26A2' 
+        '0xCEE0372632a37Ba4d0499D1E2116eCff3A17d3C3' 
     },
     'OP Sepolia': {
-        'rpc_url': 'https://fittest-clean-morning.optimism-sepolia.quiknode.pro/fa7496b9e10515665cf724e299cda1fceb88a625',
+        'rpc_url': 'https://endpoints.omniatech.io/v1/op/sepolia/public',
         'chain_id': 11155420,
-        'contract_address': '0xF221750e52aA080835d2957F2Eed0d5d7dDD8C38'
+        'contract_address': '0xb6Def636914Ae60173d9007E732684a9eEDEF26E'
     },
 }
