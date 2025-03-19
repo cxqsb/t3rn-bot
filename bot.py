@@ -23,13 +23,13 @@ def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 description = """
-自动桥接机器人  https://bridge.t1rn.io/
-操你麻痹Rambeboy,偷私钥🐶
+自动桥接机器人  https://unlock3d.t3rn.io/rewards
+还是继续操你麻痹Rambeboy,偷私钥🐶  V2版本
 """
 
 # 每个链的颜色和符号
 chain_symbols = {
-    'Blast': '\033[34m',  # 更新为 Base 链的颜色
+    'Base': '\033[34m',  # 更新为 Base 链的颜色
     'OP Sepolia': '\033[91m',         
 }
 
@@ -40,13 +40,13 @@ menu_color = '\033[95m'  # 菜单文本颜色
 
 # 每个网络的区块浏览器URL
 explorer_urls = {
-    'Blast': 'https://fragrant-quiet-spring.blast-sepolia.quiknode.pro/57781984326878d3934b9674cdb47c05f63b65f6', 
-    'OP Sepolia': 'https://fittest-clean-morning.optimism-sepolia.quiknode.pro/fa7496b9e10515665cf724e299cda1fceb88a625',
-    'BRN': 'https://brn.explorer.caldera.xyz/tx/'
+    'Base': 'https://sepolia.base.org', 
+    'OP Sepolia': 'https://sepolia-optimism.etherscan.io/tx/',
+    'b2n': 'https://b2n.explorer.caldera.xyz/tx/'
 }
 
-# 获取BRN余额的函数
-def get_brn_balance(web3, my_address):
+# 获取b2n余额的函数
+def get_b2n_balance(web3, my_address):
     balance = web3.eth.get_balance(my_address)
     return web3.from_wei(balance, 'ether')
 
@@ -58,7 +58,7 @@ def check_balance(web3, my_address):
 # 创建和发送交易的函数
 def send_bridge_transaction(web3, account, my_address, data, network_name):
     nonce = web3.eth.get_transaction_count(my_address, 'pending')
-    value_in_ether = 1.6
+    value_in_ether = 0.101
     value_in_wei = web3.to_wei(value_in_ether, 'ether')
 
     try:
@@ -68,13 +68,13 @@ def send_bridge_transaction(web3, account, my_address, data, network_name):
             'data': data,
             'value': value_in_wei
         })
-        gas_limit = gas_estimate + 50000 # 增加安全边际
+        gas_limit = gas_estimate + 50000  # 增加安全边际
     except Exception as e:
         print(f"估计gas错误: {e}")
         return None
 
     base_fee = web3.eth.get_block('latest')['baseFeePerGas']
-    priority_fee = web3.to_wei(10, 'gwei')
+    priority_fee = web3.to_wei(5, 'gwei')
     max_fee = base_fee + priority_fee
 
     transaction = {
@@ -110,8 +110,8 @@ def send_bridge_transaction(web3, account, my_address, data, network_name):
         print(f"⛽ 使用Gas: {tx_receipt['gasUsed']}")
         print(f"🗳️  区块号: {tx_receipt['blockNumber']}")
         print(f"💰 ETH余额: {formatted_balance} ETH")
-        brn_balance = get_brn_balance(Web3(Web3.HTTPProvider('https://brn.rpc.caldera.xyz/http')), my_address)
-        print(f"🔵 BRN余额: {brn_balance} BRN")
+        b2n_balance = get_b2n_balance(Web3(Web3.HTTPProvider('https://b2n.rpc.caldera.xyz/http')), my_address)
+        print(f"🔵 b2n余额: {b2n_balance} b2n")
         print(f"🔗 区块浏览器链接: {explorer_link}\n{reset_color}")
 
         return web3.to_hex(tx_hash), value_in_ether
@@ -157,8 +157,8 @@ def process_network_transactions(network_name, bridges, chain_data, successful_t
                 print(f"{'='*150}")
                 print("\n")
             
-            # 随机等待 30 到 60 秒
-            wait_time = random.uniform(60, 120)
+            # 随机等待 120 到 180 秒
+            wait_time = random.uniform(120, 180)
             print(f"⏳ 等待 {wait_time:.2f} 秒后继续...\n")
             time.sleep(wait_time)  # 随机延迟时间
 
@@ -179,9 +179,9 @@ def main():
     print("\033[92m" + center_text(description) + "\033[0m")
     print("\n\n")
 
-    successful_txs = 0  
-    current_network = 'Blast'  # 默认从  链开始
-    alternate_network = 'OP Sepolia'
+    successful_txs = 0
+    current_network = 'OP Sepolia'  # 默认从 Base 链开始
+    alternate_network = 'Base'
 
     while True:
         # 检查当前网络余额是否足够
@@ -198,16 +198,16 @@ def main():
         my_address = Account.from_key(private_keys[0]).address  # 使用第一个私钥的地址
         balance = check_balance(web3, my_address)
 
-        # 如果余额不足 0.1 ETH，切换到另一个链
-        if balance < 0:
-            print(f"{chain_symbols[current_network]}{current_network}余额不足 0.5 ETH，切换到 {alternate_network}{reset_color}")
+        # 如果余额不足 0.101 ETH，切换到另一个链
+        if balance < 0.101:
+            print(f"{chain_symbols[current_network]}{current_network}余额不足 0.101 ETH，切换到 {alternate_network}{reset_color}")
             current_network, alternate_network = alternate_network, current_network  # 交换链
 
         # 处理当前链的交易
-        successful_txs = process_network_transactions(current_network, ["Blast - OP Sepolia"] if current_network == 'Blast' else ["OP - Blast"], networks[current_network], successful_txs)
+        successful_txs = process_network_transactions(current_network, ["Base - OP Sepolia"] if current_network == 'Base' else ["OP - Base"], networks[current_network], successful_txs)
 
         # 自动切换网络
-        time.sleep(random.uniform(30, 40))  # 在每次切换网络时增加随机的延时
+        time.sleep(random.uniform(30, 60))  # 在每次切换网络时增加随机的延时
 
 if __name__ == "__main__":
     main()
