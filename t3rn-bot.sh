@@ -4,7 +4,7 @@
 SCRIPT_PATH="$HOME/t3rn-bot.sh"
 
 # 定义仓库地址和目录名称
-REPO_URL="https://github.com/cxqsb/t3rn-bot.git"
+REPO_URL="https://github.com/sdohuajia/t3rn-bot.git"
 DIR_NAME="t3rn-bot"
 PYTHON_FILE="keys_and_addresses.py"
 DATA_BRIDGE_FILE="data_bridge.py"
@@ -15,14 +15,14 @@ VENV_DIR="t3rn-env"  # 虚拟环境目录
 function main_menu() {
     while true; do
         clear
-        echo "1脚本由大赌社区哈哈哈哈编写，推特 @ferdie_jhovie，免费开源，请勿相信收费"
+        echo "脚本由大赌社区哈哈哈哈编写，推特 @ferdie_jhovie，免费开源，请勿相信收费"
         echo "如有问题，可联系推特，仅此只有一个号"
         echo "================================================================"
         echo "退出脚本，请按键盘 ctrl + C 退出即可"
         echo "请选择要执行的操作:"
         echo "1. 执行t3rn跨链脚本"
         echo "2. 退出"
-       
+        
         read -p "请输入选项 (1/2): " option
         case $option in
             1)
@@ -54,7 +54,7 @@ function execute_cross_chain_script() {
         exit 1
     fi
 
-      # 检查是否安装了 python3-pip 和 python3-venv
+    # 检查是否安装了 python3-pip 和 python3-venv
     if ! command -v pip3 &> /dev/null; then
         echo "pip 未安装，正在安装 python3-pip..."
         sudo apt update
@@ -135,12 +135,12 @@ EOL
     echo "脚本执行完成！所有依赖已安装，私钥和标签已保存到 $PYTHON_FILE 中。"
     echo "请务必妥善保管此文件，避免泄露您的私钥和标签信息！"
 
-    # 获取额外的用户输入："Blast - OP Sepolia" 和 "OP - Blast"
-    echo "请输入 'Blast - OP Sepolia' 的值："
-    read -r blast_op_sepolia_value
+    # 获取额外的用户输入："Base - OP Sepolia" 和 "OP - Base"
+    echo "请输入 'Base - OP Sepolia' 的值："
+    read -r base_op_sepolia_value
 
-    echo "请输入 'OP - Blast' 的值："
-    read -r op_blast_value
+    echo "请输入 'OP - Base' 的值："
+    read -r op_base_value
 
     # 写入 data_bridge.py 文件
     echo "正在写入 $DATA_BRIDGE_FILE 文件..."
@@ -148,11 +148,11 @@ EOL
 # 此文件由脚本生成
 
 data_bridge = {
-    # Data bridge Blast
-    "OP - Blast": "$op_blast_value",
+    # Data bridge Base
+    "Base - OP Sepolia": "$base_op_sepolia_value",
 
     # Data bridge OP Sepolia
-    "Blast - OP Sepolia": "$blast_op_sepolia_value",
+    "OP - Base": "$op_base_value",
 }
 EOL
 
@@ -162,10 +162,10 @@ EOL
     echo "配置完成，正在通过 screen 运行 bot.py..."
 
     # 使用 screen 后台运行 bot.py
-    screen -dmS t3rn-bot python3 $BOT_FILE
+    screen -dmS t3rn python3 $BOT_FILE
 
     # 输出信息
-    echo "bot.py 已在后台运行，您可以通过 'screen -r t3rn-bot' 查看运行日志。"
+    echo "bot.py 已在后台运行，您可以通过 'screen -r t3rn' 查看运行日志。"
 
     # 提示用户按任意键返回主菜单
     read -n 1 -s -r -p "按任意键返回主菜单..."
