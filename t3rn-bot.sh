@@ -106,25 +106,13 @@ function execute_cross_chain_script() {
     echo "请输入您的标签（多个标签以空格分隔，与私钥顺序一致）："
     read -r labels_input
 
-    # 新增代理输入，按照私钥顺序，如果不使用代理，则留空即可
-    echo "请输入您的代理地址（多个代理以空格分隔，与私钥顺序一致，若无代理请留空）："
-    read -r proxies_input
-
-    # 检查输入是否一致，拆分为数组
+    # 检查输入是否一致
     IFS=' ' read -r -a private_keys <<< "$private_keys_input"
     IFS=' ' read -r -a labels <<< "$labels_input"
-    IFS=' ' read -r -a proxies <<< "$proxies_input"
 
     if [ "${#private_keys[@]}" -ne "${#labels[@]}" ]; then
         echo "私钥和标签数量不一致，请重新运行脚本并确保它们匹配！"
         exit 1
-    fi
-
-    # 如果代理数量少于私钥数量，则填充空值
-    if [ "${#proxies[@]}" -lt "${#private_keys[@]}" ]; then
-        for ((i=${#proxies[@]}; i<${#private_keys[@]}; i++)); do
-            proxies[i]=""
-        done
     fi
 
     # 写入 keys_and_addresses.py 文件
@@ -139,24 +127,20 @@ $(printf "    '%s',\n" "${private_keys[@]}")
 labels = [
 $(printf "    '%s',\n" "${labels[@]}")
 ]
-
-proxies = [
-$(printf "    '%s',\n" "${proxies[@]}")
-]
 EOL
 
     echo "$PYTHON_FILE 文件已生成。"
 
     # 提醒用户私钥安全
-    echo "脚本执行完成！所有依赖已安装，私钥、标签和代理已保存到 $PYTHON_FILE 中。"
-    echo "请务必妥善保管此文件，避免泄露您的私钥、标签和代理信息！"
+    echo "脚本执行完成！所有依赖已安装，私钥和标签已保存到 $PYTHON_FILE 中。"
+    echo "请务必妥善保管此文件，避免泄露您的私钥和标签信息！"
 
-    # 获取额外的用户输入："Base - OP Sepolia" 和 "OP - Base"
-    echo "请输入 'Base - OP Sepolia' 的值："
-    read -r base_op_sepolia_value
+    # 获取额外的用户输入："Arbitrum - OP Sepolia" 和 "OP - Arbitrum"
+    echo "请输入 'Arbitrum - OP Sepolia' 的值："
+    read -r arbitrum_op_sepolia_value
 
-    echo "请输入 'OP - Base' 的值："
-    read -r op_base_value
+    echo "请输入 'OP - Arbitrum' 的值："
+    read -r op_arbitrum_value
 
     # 写入 data_bridge.py 文件
     echo "正在写入 $DATA_BRIDGE_FILE 文件..."
@@ -164,11 +148,11 @@ EOL
 # 此文件由脚本生成
 
 data_bridge = {
-    # Data bridge Base
-    "Base - OP Sepolia": "$base_op_sepolia_value",
+    # Data bridge Arbitrum
+    "Arbitrum - OP Sepolia": "$arbitrum_op_sepolia_value",
 
     # Data bridge OP Sepolia
-    "OP - Base": "$op_base_value",
+    "OP - Arbitrum": "$op_arbitrum_value",
 }
 EOL
 
