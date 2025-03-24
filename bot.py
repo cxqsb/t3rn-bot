@@ -29,7 +29,7 @@ description = """
 
 # 每个链的颜色和符号
 chain_symbols = {
-    'Arbitrum': '\033[34m',  # 更新为 Arbitrum 链的颜色
+    'Base': '\033[34m',  # Base 链颜色
     'OP Sepolia': '\033[91m',         
 }
 
@@ -40,7 +40,7 @@ menu_color = '\033[95m'  # 菜单文本颜色
 
 # 每个网络的区块浏览器URL
 explorer_urls = {
-    'Arbitrum': 'https://sepolia.arbitrum.io', 
+    'Base': 'https://sepolia.base.org',
     'OP Sepolia': 'https://sepolia-optimism.etherscan.io/tx/',
     'b2n': 'https://b2n.explorer.caldera.xyz/tx/'
 }
@@ -168,8 +168,8 @@ def process_network_transactions(network_name, bridges, chain_data, successful_t
 def display_menu():
     print(f"{menu_color}选择要运行交易的链:{reset_color}")
     print(" ")
-    print(f"{chain_symbols['Arbitrum']}1. Arbitrum -> OP Sepolia{reset_color}")
-    print(f"{chain_symbols['OP Sepolia']}2. OP -> Arbitrum{reset_color}")
+    print(f"{chain_symbols['Base']}1. Arbitrum -> OP Sepolia{reset_color}")
+    print(f"{chain_symbols['OP Sepolia']}2. OP -> Base{reset_color}")
     print(f"{menu_color}3. 运行所有链{reset_color}")
     print(" ")
     choice = input("输入选择 (1-3): ")
@@ -180,7 +180,7 @@ def main():
     print("\n\n")
 
     successful_txs = 0
-    current_network = 'Arbitrum'  # 默认从 Arbitrum 链开始
+    current_network = 'Base'  # 默认从 Base 链开始
     alternate_network = 'OP Sepolia'
 
     while True:
@@ -204,7 +204,7 @@ def main():
             current_network, alternate_network = alternate_network, current_network  # 交换链
 
         # 处理当前链的交易
-        successful_txs = process_network_transactions(current_network, ["Arbitrum - OP Sepolia"] if current_network == 'Arbitrum' else ["OP - Arbitrum"], networks[current_network], successful_txs)
+        successful_txs = process_network_transactions(current_network, ["Base - OP Sepolia"] if current_network == 'Base' else ["OP - Base"], networks[current_network], successful_txs)
 
         # 自动切换网络
         time.sleep(random.uniform(30, 60))  # 在每次切换网络时增加随机的延时
