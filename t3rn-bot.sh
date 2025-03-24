@@ -149,10 +149,10 @@ EOL
 
 data_bridge = {
     # Data bridge Arbitrum
-    "Arbitrum - OP Sepolia": "$arbitrum_op_sepolia_value",
+    "Base - OP Sepolia": "$base_op_sepolia_value",
 
     # Data bridge OP Sepolia
-    "OP - Arbitrum": "$op_arbitrum_value",
+    "OP - Base": "$op_base_value",
 }
 EOL
 
