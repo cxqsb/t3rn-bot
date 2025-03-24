@@ -135,12 +135,12 @@ EOL
     echo "脚本执行完成！所有依赖已安装，私钥和标签已保存到 $PYTHON_FILE 中。"
     echo "请务必妥善保管此文件，避免泄露您的私钥和标签信息！"
 
-    # 获取额外的用户输入："Arbitrum - OP Sepolia" 和 "OP - Arbitrum"
-    echo "请输入 'Arbitrum - OP Sepolia' 的值："
-    read -r arbitrum_op_sepolia_value
+  # 获取额外的用户输入："Base - OP Sepolia" 和 "OP - Base"
+    echo "请输入 'Base - OP Sepolia' 的值："
+    read -r base_op_sepolia_value
 
-    echo "请输入 'OP - Arbitrum' 的值："
-    read -r op_arbitrum_value
+    echo "请输入 'OP - Base' 的值："
+    read -r op_base_value
 
     # 写入 data_bridge.py 文件
     echo "正在写入 $DATA_BRIDGE_FILE 文件..."
