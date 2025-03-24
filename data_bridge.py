@@ -2,8 +2,8 @@
 
 data_bridge = {
     # Data bridge Base
-    "Blast - OP Sepolia": '',
+    "Base - OP Sepolia": '',
 
     # Data bridge OP Sepolia
-    "OP - Blast": '',
+    "OP - Base": '',
 }
