@@ -58,7 +58,7 @@ def check_balance(web3, my_address):
 # 创建和发送交易的函数
 def send_bridge_transaction(web3, account, my_address, data, network_name):
     nonce = web3.eth.get_transaction_count(my_address, 'pending')
-    value_in_ether = 1.01
+    value_in_ether = 1.1
     value_in_wei = web3.to_wei(value_in_ether, 'ether')
 
     try:
@@ -74,7 +74,7 @@ def send_bridge_transaction(web3, account, my_address, data, network_name):
         return None
 
     base_fee = web3.eth.get_block('latest')['baseFeePerGas']
-    priority_fee = web3.to_wei(0.1, 'gwei')
+    priority_fee = web3.to_wei(1.5, 'gwei')
     max_fee = base_fee + priority_fee
 
     transaction = {
